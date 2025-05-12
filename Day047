@@ -1,0 +1,31 @@
+class Solution {
+  public:
+
+    // Function to return length of longest subsequence of consecutive integers.
+    int longestConsecutive(vector<int>& arr) {
+        // Your code here
+        unordered_map <int,bool> mp;
+        for(int i=0;i<arr.size();i++)
+        {
+            mp[arr[i]] = true;
+        }
+        int ans =0;
+        for(int i=0;i<arr.size();i++)
+        {
+            int num = arr[i];
+            if(mp.find(num-1) == mp.end())
+            {
+                
+                int count = 1;
+                while(mp.find(num+1)!= mp.end())
+                {
+                    num += 1;
+                    count+=1 ;
+                }
+                ans = max(ans,count);
+            }
+            
+        }
+        return ans;
+    }
+};
