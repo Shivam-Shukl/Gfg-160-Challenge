@@ -1,0 +1,21 @@
+
+class Solution {
+  public:
+    vector<vector<int>> mergeOverlap(vector<vector<int>>& arr) {
+        // Code here
+        if(arr.empty()) return {};
+        sort(arr.begin(),arr.end());
+        
+        int resIdx = 0;
+        for(int i = 1 ;i<arr.size();i++)
+        {
+            if(arr[resIdx][1] >= arr[i][0])
+                arr[resIdx][1] = max(arr[resIdx][1],arr[i][1]);
+            else{
+                resIdx++;
+                arr[resIdx] = arr[i];
+            }
+        }
+        return vector<vector<int>>(arr.begin(),arr.begin() + resIdx +1);
+    }
+};
