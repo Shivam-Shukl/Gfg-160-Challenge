@@ -1,0 +1,30 @@
+
+class Solution {
+  public:
+    
+    int findMin(vector<int>& arr) {
+        // complete the function here
+        int n=arr.size();
+        int start=0, end=n-1;
+        int ans=INT_MAX;
+        
+        while(start<=end){
+            int mid=start+(end-start)/2;
+            
+            if(arr[start]<=arr[end]){
+                ans=min(ans, arr[start]);
+                break;
+            }
+            
+            if(arr[start]<=arr[mid]){
+                ans=min(ans, arr[start]);
+                start=mid+1;
+            }else{
+                ans=min(ans, arr[mid]);
+                end=mid-1;
+            }
+        }
+        return ans;
+    }
+ 
+};
