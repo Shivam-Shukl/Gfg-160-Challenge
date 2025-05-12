@@ -1,0 +1,66 @@
+
+class Solution {
+  public:
+    int startInd(vector<int>& arr,int target)
+    {
+        int ans = -1;
+        int n= arr.size();
+        int start = 0,end = n-1;
+        while(end>=start)
+        {
+            int mid = start + (end -start) / 2;
+            if(arr[mid] == target)
+            {
+                if(mid-1 >=0 && arr[mid-1] == target)
+                {
+                    end = mid -1;
+                }else{
+                    ans = mid;
+                    break;
+                }
+            }else if(arr[mid] > target)
+            {
+                end = mid -1;
+            }else{
+                start = mid+1;
+            }
+        }
+        return ans;
+    }
+    int endInd(vector<int>& arr, int target)
+    {
+        int ans = -1;
+        int n= arr.size();
+        int start = 0,end = n-1;
+        while(end>=start)
+        {
+            int mid = start + (end -start) / 2;
+            if(arr[mid] == target)
+            {
+                if(mid+1 <n && arr[mid+1] == target)
+                {
+                    start= mid + 1;
+                }else{
+                    ans = mid;
+                    break;
+                }ans = mid;
+                start = mid+1;
+            }else if(arr[mid] > target)
+            {
+                end = mid -1;
+            }else{
+                start = mid+1;
+            }
+        }
+        return ans;
+    }
+    int countFreq(vector<int>& arr, int target) {
+        // code here
+        int start = startInd(arr,target);
+        int end = endInd(arr,target);
+        if(start!=-1 && end != -1)
+            return end-start +1;
+        else
+            return 0;
+    }
+};
